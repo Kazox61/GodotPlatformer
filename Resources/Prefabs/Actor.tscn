@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ush7w2scw0v"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/ActorPlayer.cs" id="1_5tbks"]
+[ext_resource type="Texture2D" uid="uid://ded3jeywmhm6l" path="res://Resources/Sprites/player.png" id="2_3sqf4"]
+[ext_resource type="Texture2D" uid="uid://bo4n2od3naelu" path="res://Resources/Sprites/shadow2.png" id="3_ef182"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7bgtt"]
+radius = 3.0
+
+[node name="Actor" type="CharacterBody2D"]
+position = Vector2(58, 53)
+script = ExtResource("1_5tbks")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7bgtt")
+
+[node name="ActorDisplay" type="Node2D" parent="."]
+
+[node name="ActorSprite" type="Sprite2D" parent="ActorDisplay"]
+z_index = 1
+position = Vector2(0, -14)
+texture = ExtResource("2_3sqf4")
+
+[node name="Shadow" type="Sprite2D" parent="ActorDisplay"]
+texture = ExtResource("3_ef182")

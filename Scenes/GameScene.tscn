@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://dru2drjru3qlx"]
+
+[ext_resource type="Texture2D" uid="uid://dwegs5gvw14le" path="res://Resources/Sprites/platform.png" id="1_jumrc"]
+[ext_resource type="Script" path="res://Scripts/Actor/ActorPlayer.cs" id="2_h3j7d"]
+[ext_resource type="Texture2D" uid="uid://ded3jeywmhm6l" path="res://Resources/Sprites/player.png" id="3_77hgp"]
+[ext_resource type="Resource" uid="uid://dklog4maetc3e" path="res://Resources/Setups/ActorPlayerSetup.tres" id="3_kk2qq"]
+[ext_resource type="Texture2D" uid="uid://bo4n2od3naelu" path="res://Resources/Sprites/shadow2.png" id="4_6apy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bfvs"]
+size = Vector2(30, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbovo"]
+size = Vector2(62, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7bgtt"]
+radius = 3.0
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Platform" type="Area2D" parent="."]
+position = Vector2(58, 53)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("RectangleShape2D_6bfvs")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("RectangleShape2D_rbovo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+position = Vector2(0, 8)
+texture = ExtResource("1_jumrc")
+
+[node name="Platform2" type="Area2D" parent="."]
+position = Vector2(148, 53)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_6bfvs")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_rbovo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2"]
+position = Vector2(0, 8)
+texture = ExtResource("1_jumrc")
+
+[node name="Actor" type="CharacterBody2D" parent="." node_paths=PackedStringArray("actorSprite")]
+position = Vector2(58, 53)
+script = ExtResource("2_h3j7d")
+actorSetup = ExtResource("3_kk2qq")
+actorSprite = NodePath("ActorDisplay/ActorSprite")
+metadata/_edit_group_ = true
+
+[node name="Collider" type="CollisionShape2D" parent="Actor"]
+shape = SubResource("CircleShape2D_7bgtt")
+
+[node name="ActorDisplay" type="Node2D" parent="Actor"]
+position = Vector2(0, -14)
+
+[node name="ActorSprite" type="Sprite2D" parent="Actor/ActorDisplay"]
+z_index = 1
+texture = ExtResource("3_77hgp")
+
+[node name="Shadow" type="Sprite2D" parent="Actor/ActorDisplay"]
+position = Vector2(0, 14)
+texture = ExtResource("4_6apy2")
+
+[node name="Camera2D" type="Camera2D" parent="Actor"]
+
+[connection signal="body_entered" from="Platform" to="Actor" method="_OnGroundEnter"]
+[connection signal="body_exited" from="Platform" to="Actor" method="_OnGroundLeave"]
+[connection signal="body_entered" from="Platform2" to="Actor" method="_OnGroundEnter"]
+[connection signal="body_exited" from="Platform2" to="Actor" method="_OnGroundLeave"]

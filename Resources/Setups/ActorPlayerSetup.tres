@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dklog4maetc3e"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/ActorSetup.cs" id="1_udqhb"]
+
+[resource]
+script = ExtResource("1_udqhb")
+speed = 64.0
+fallSpeed = 512.0
+friction = 20.0
